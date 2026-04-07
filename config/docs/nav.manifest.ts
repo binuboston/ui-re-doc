@@ -33,4 +33,18 @@ export const docsNavManifest: DocSection[] = [
       },
     ],
   },
+  {
+    id: 'brd',
+    title: 'PMS BRD',
+    emoji: '📋',
+    pages: [
+      { slug: 'brd/overview', title: 'BRD overview' },
+      { slug: 'brd/modules', title: 'Modules & navigation' },
+      { slug: 'brd/roles-permissions', title: 'Roles & permissions' },
+      { slug: 'brd/scheduling', title: 'Scheduling' },
+      { slug: 'brd/patients', title: 'Patients' },
+      { slug: 'brd/billing-payments', title: 'Billing & payments' },
+      { slug: 'brd/reporting-settings', title: 'Reporting & settings' },
+    ],
+  },
 ]

@@ -1,10 +1,12 @@
 import { docsNavManifest } from '@/config/docs/nav.manifest'
+import { brdDocPages } from '@/config/docs/brd'
 import { playbookDocPages } from '@/config/docs/playbook'
 import { DOC_ROUTE } from '@/config/docs/slugs'
 import type { DocPage } from '@/lib/docs/types'
 
 const pages: Record<string, DocPage> = {
   ...playbookDocPages,
+  ...brdDocPages,
 }
 
 export const docsSections = docsNavManifest
