@@ -1,6 +1,5 @@
 'use client'
 
-import { BookOpen } from 'lucide-react'
 import { useQuery } from '@tanstack/react-query'
 
 import { DocNavSections } from '@/components/docs/doc-nav-sections'
@@ -26,8 +25,14 @@ export function DocsSidebarLeft({
     <Sidebar className="border-r-0" {...props}>
       <SidebarHeader>
         <div className="flex items-center gap-2 px-2 py-1.5">
-          <div className="flex size-8 items-center justify-center rounded-md bg-sidebar-primary text-sidebar-primary-foreground">
-            <BookOpen className="size-4" />
+          <div className="flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-md bg-white shadow-sm ring-1 ring-sidebar-border dark:bg-white">
+            <img
+              src={DOCS_BRANDING.logoSrc}
+              alt={DOCS_BRANDING.logoAlt}
+              width={32}
+              height={32}
+              className="size-8 object-contain"
+            />
           </div>
           <div className="grid flex-1 text-left text-sm leading-tight">
             <span className="truncate font-semibold">
