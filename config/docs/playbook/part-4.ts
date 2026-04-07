@@ -60,6 +60,7 @@ Each section below lists a **target window** in prose and a **checklist** you ca
 
 **Target window:** Weeks 2–3 (parallel with design system).
 
+- [ ] Bring the project up using the **template README** (env, install, dev server) before refactoring.
 - [ ] Inventory demo/template pages; list blocks to extract (table, form, modal, filters, tabs).
 - [ ] Replace ad-hoc markup with shared primitives where possible.
 - [ ] Document “before/after” for one pilot screen.

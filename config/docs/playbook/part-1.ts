@@ -63,14 +63,22 @@ src/
   'playbook/template-refactoring': {
     slug: 'playbook/template-refactoring',
     title: 'Template refactoring',
-    markdown: `## Purchased templates are usually wrong for PMS
+    markdown: `## Start exactly as the template’s README describes
 
-They tend to be **overloaded**, **hardcoded**, and **not scalable** out of the box.
+Commercial templates ship with a **Getting started** or **README** for a reason: Node version, package manager, env files, install commands, and how to run \`dev\` are not optional details. Follow that path **first** so you have a known-good project — then adapt it for a PMS.
 
-## Step 1 — Strip
+A template is almost always a **generic admin or marketing shell**, not a tenant-aware PMS. That is not a defect; it is the starting point. Once the app runs the way the author documents, you layer in config, modules, permissions, and APIs from this playbook.
 
-- Remove demo pages and unused widgets.
-- Delete dead routes and sample data.
+## Step 0 — New project from the readme
+
+- Create or clone the project using the steps in **README.md** (or the vendor docs link inside it).
+- Copy \`.env.example\` → \`.env\` (or whatever the readme names), fill required keys, and confirm the starter app boots without errors.
+- Only after that baseline works, treat anything you remove or refactor as **your** product decision — not “the template is broken.”
+
+## Step 1 — Strip (intentional cleanup)
+
+- Remove demo pages and unused widgets the readme marks as samples (or that you no longer need).
+- Delete dead routes and sample data once you understand what the starter is showing.
 
 ## Step 2 — Identify building blocks
 

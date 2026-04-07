@@ -28,7 +28,7 @@ export const MOCKUP_PLAN_BY_SLUG: Record<string, DocMockupDefinition> = {
   },
   'playbook/template-refactoring': {
     caption:
-      'Standard blocks (table, form, tabs…) — one visual language across modules and tenants',
+      'Follow the template README for a clean start, then unify blocks — one visual language across modules and tenants',
     preset: {
       kind: 'block-grid',
       cols: 3,

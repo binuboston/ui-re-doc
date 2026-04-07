@@ -417,9 +417,9 @@ export function MockupPresetBody({ preset }: { preset: MockupPreset }) {
         <div className="flex flex-col gap-3">
           <div className={cn(mockupStyles.box, 'border-dashed p-2.5')}>
             <p className="text-[9px] leading-relaxed text-reading-muted">
-              Standardize demo noise into reusable blocks — same table, form,
-              and dialog patterns across modules so every screen feels like one
-              product.
+              After the template runs per its README, turn sample screens into
+              reusable blocks — same table, form, and dialog patterns across
+              modules so every screen feels like one product.
             </p>
           </div>
           <div
