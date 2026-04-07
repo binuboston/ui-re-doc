@@ -47,4 +47,17 @@ export const docsNavManifest: DocSection[] = [
       { slug: 'brd/reporting-settings', title: 'Reporting & settings' },
     ],
   },
+  {
+    id: 'brand-guideline',
+    title: 'Brand guideline',
+    emoji: '🎨',
+    pages: [
+      { slug: 'brand-guideline/style-showcase', title: 'UI style showcase' },
+      { slug: 'brand-guideline/overview', title: 'Brand overview' },
+      { slug: 'brand-guideline/logo-usage', title: 'Logo usage' },
+      { slug: 'brand-guideline/colors', title: 'Color palette' },
+      { slug: 'brand-guideline/typography', title: 'Typography' },
+      { slug: 'brand-guideline/ui-rules', title: 'UI rules' },
+    ],
+  },
 ]
