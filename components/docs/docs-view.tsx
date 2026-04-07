@@ -15,7 +15,6 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb'
-import { Separator } from '@/components/ui/separator'
 import {
   SidebarInset,
   SidebarProvider,
@@ -23,7 +22,7 @@ import {
 } from '@/components/ui/sidebar'
 import { Skeleton } from '@/components/ui/skeleton'
 import { docsCopy } from '@/config/docs/copy'
-import { DOCS_LAYOUT } from '@/config/docs/layout'
+import { DOCS_LAYOUT, DOCS_SHELL } from '@/config/docs/layout'
 import { cn } from '@/lib/utils'
 import { fetchDocPage } from '@/lib/docs/fetch-docs'
 import { docsQueryKeys } from '@/lib/docs/query-keys'
@@ -53,25 +52,26 @@ export function DocsView() {
     <SidebarProvider>
       <DocsSidebarLeft />
       <SidebarInset>
-        <header className="sticky top-0 z-10 flex h-14 shrink-0 items-center gap-2 border-b bg-background">
-          <div className="flex flex-1 items-center gap-2 px-3">
+        <header className="sticky top-0 z-10 flex h-14 shrink-0 items-center gap-2 bg-background">
+          <div
+            className={cn(
+              'flex min-w-0 flex-1 items-center gap-3',
+              DOCS_SHELL.mainHeaderInsetX
+            )}
+          >
             <SidebarTrigger />
-            <Separator
-              orientation="vertical"
-              className="mr-2 data-[orientation=vertical]:h-4"
-            />
-            <Breadcrumb>
+            <Breadcrumb className="min-w-0 flex-1">
               <BreadcrumbList>
-                <BreadcrumbItem>
-                  <BreadcrumbPage className="line-clamp-1">
+                <BreadcrumbItem className="min-w-0 max-w-full">
+                  <BreadcrumbPage className="break-words whitespace-normal">
                     {docsCopy.breadcrumb.root}
                   </BreadcrumbPage>
                 </BreadcrumbItem>
                 {data?.title ? (
                   <>
                     <BreadcrumbSeparator />
-                    <BreadcrumbItem>
-                      <BreadcrumbPage className="line-clamp-1">
+                    <BreadcrumbItem className="min-w-0 max-w-full">
+                      <BreadcrumbPage className="break-words whitespace-normal">
                         {data.title}
                       </BreadcrumbPage>
                     </BreadcrumbItem>
@@ -82,7 +82,13 @@ export function DocsView() {
           </div>
         </header>
         <div className="flex min-w-0 flex-1">
-          <article className="min-w-0 flex-1 bg-reading-surface px-4 py-8 md:px-8 md:py-10 lg:px-12">
+          <article
+            className={cn(
+              'min-w-0 flex-1 bg-reading-surface',
+              DOCS_SHELL.articlePadX,
+              DOCS_SHELL.articlePadY
+            )}
+          >
             {isPending ? (
               <div
                 className={cn('mx-auto space-y-4', DOCS_LAYOUT.articleMaxWidth)}
