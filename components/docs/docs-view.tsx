@@ -122,7 +122,7 @@ export function DocsView() {
                     : DOCS_LAYOUT.articleMaxWidth
                 )}
               >
-                <h1 className={DOCS_LAYOUT.docPageTitle}>{data.title}</h1>
+                <h1 className="sr-only">{data.title}</h1>
                 <DocPageLowFiMockup slugPath={slugPath} />
                 <DocMarkdown source={data.markdown} />
                 {PageDemo ? <PageDemo /> : null}
