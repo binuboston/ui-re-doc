@@ -1,7 +1,7 @@
 import type { DocPage } from '@/lib/docs/types'
 
 /**
- * PMS BRD (Business Requirements Document)
+ * Project Management BRD (Business Requirements Document)
  *
  * These pages describe the product modules and expected behavior at a level that
  * supports planning, estimation, and implementation sequencing.
@@ -12,26 +12,26 @@ export const brdDocPages: Record<string, DocPage> = {
     title: 'BRD overview',
     markdown: `## Purpose
 
-Define **what the PMS must do**, for whom, and how success is measured. This BRD is the functional baseline for implementation planning and QA.
+Define **what the Project Management application must do**, for whom, and how success is measured. This BRD is the functional baseline for implementation planning and QA.
 
 ## Users
 
-- **Practice admin/owner**: configure the practice, manage staff, view reports.
-- **Front desk / reception**: register patients, schedule, check-in/out, collect payments.
-- **Provider**: view schedule, document encounters, complete clinical workflows.
-- **Billing**: invoicing, claims (if applicable), reconciliation, aging follow-up.
-- **Patient (optional portal)**: view appointments, forms, invoices, payments.
+- **Org owner / admin**: configure organization, workspaces, billing, security.
+- **Project manager**: plan work, assign tasks, track progress, manage scope.
+- **Team member**: execute tasks, update status, log time, collaborate.
+- **Client / stakeholder** (optional): read-only visibility, approvals, feedback.
+- **Finance / operations** (optional): budgets, invoices, utilization, cost tracking.
 
 ## Success metrics
 
-- **Scheduling**: fewer no-shows, faster rescheduling, higher utilization.
-- **Front desk throughput**: reduced check-in time, fewer data entry errors.
-- **Billing**: shorter days sales outstanding (DSO), fewer claim denials.
-- **Clinical**: faster note completion, better data capture, auditability.
+- **Delivery predictability**: higher on-time completion, fewer missed dependencies.
+- **Cycle time**: tasks move faster from backlog → done.
+- **Visibility**: accurate status reporting, fewer “where is this?” questions.
+- **Quality**: fewer reopenings/defects due to unclear acceptance criteria.
 
 ## Scope boundaries (for clarity)
 
-- This BRD focuses on **core PMS workflows**. Integrations (payment processor, SMS gateway, insurance clearinghouse) are referenced as capabilities but can be delivered in phases.
+- This BRD focuses on **core project workflows** (projects, tasks, collaboration, reporting). Advanced integrations (SSO, Jira/GitHub, time tracking, invoicing) can be delivered in phases.
 `,
   },
 
@@ -40,49 +40,51 @@ Define **what the PMS must do**, for whom, and how success is measured. This BRD
     title: 'Modules & navigation',
     markdown: `## Modules (MVP → full product)
 
-### 1) Authentication & tenant
+### 1) Authentication & organization
 - Login, session handling
-- Practice/tenant context (timezone, locale, branding)
-- User management: invite, role assignment, deactivation
+- Org/workspace context (timezone, locale, branding)
+- User management: invite, roles, deactivation
 
 ### 2) Dashboard
-- Today summary (appointments, outstanding tasks, unpaid invoices)
-- Quick actions
+- My work (assigned tasks, due soon, mentions)
+- Team overview (at-risk projects, blockers)
+- Quick actions (new project, new task)
 
-### 3) Patients (CRM)
-- Patient profile (demographics, contacts, consents)
-- Attachments & documents
-- Insurance (if applicable)
+### 3) Projects
+- Project list + status (active/on-hold/completed)
+- Project overview: goals, milestones, health, team
+- Project settings (workflow, templates)
 
-### 4) Scheduling
-- Calendar by provider/location/room
-- Appointment types, availability, time-off
-- Reschedule/cancel/no-show workflows
+### 4) Tasks (work items)
+- Backlog + prioritization
+- Kanban/board + list views
+- Task details: assignee, due date, labels, checklists
+- Subtasks, dependencies, blocking
+- Bulk actions
 
-### 5) Encounters / clinical docs
-- Visit notes (templates + free text)
+### 5) Planning (optional MVP → Phase 2)
+- Milestones, sprints/iterations
+- Capacity & workload
+- Roadmap view (timeline)
+
+### 6) Collaboration
+- Comments, mentions, activity feed
 - Attachments
-- Finalize/lock + audit history (optional by regulation)
+- Notifications (in-app, email)
 
-### 6) Billing & payments
-- Price list / services
-- Invoice lifecycle: draft → issued → paid/partially paid → refunded/void
-- Receipts, reconciliation
+### 7) Time tracking & costs (optional)
+- Timesheets, time entries per task/project
+- Billable vs non-billable
+- Cost rates, utilization
 
-### 7) Reporting
-- Revenue, collections, aging
-- Utilization, cancellations, no-shows
-- Exports
-
-### 8) Settings
-- Practice profile, branding
-- Services, users, permissions
-- Notifications, integrations
+### 8) Billing (optional)
+- Subscription plan, seats, invoices
+- Client billing (optional: project invoicing)
 
 ## Navigation principles
 
 - One **shell**, multiple **modules**. The shell shows a stable left nav; the module owns its internal routes.
-- Feature availability is **config + permissions** driven (tenant plan, flags, roles).
+- Feature availability is **config + permissions** driven (plan, flags, roles).
 - “Module entry” pages must be bookmarkable and have deterministic URLs.
 `,
   },
@@ -92,12 +94,10 @@ Define **what the PMS must do**, for whom, and how success is measured. This BRD
     title: 'Roles & permissions',
     markdown: `## Roles
 
-- **Admin**: full access to configuration, users, financials, reporting.
-- **Manager**: operational access + reporting; limited system settings.
-- **Front desk**: patients + scheduling + payments (limited billing actions).
-- **Provider**: schedule + encounter documentation; limited patient edits.
-- **Billing**: invoices/claims/reconciliation; limited clinical access.
-- **Patient** (portal): own appointments, forms, invoices, payments.
+- **Org admin**: full access to org settings, users, billing, audit.
+- **Project manager**: create/manage projects, workflows, assignments, reporting.
+- **Member**: work on tasks, update status, comment, attach files.
+- **Guest/Client** (optional): read-only (or limited comment/approve) access.
 
 ## Permission model
 
@@ -105,7 +105,7 @@ Define **what the PMS must do**, for whom, and how success is measured. This BRD
 
 Define permissions as \`{ resource, action }\` pairs:
 
-- **Resources**: patients, appointments, encounters, invoices, payments, reports, settings, users
+- **Resources**: projects, tasks, comments, files, time, reports, settings, users
 - **Actions**: view, create, edit, delete, finalize, refund, export, manage
 
 ### Rules
@@ -116,89 +116,90 @@ Define permissions as \`{ resource, action }\` pairs:
 
 ## Audit logging (minimum)
 
-- Patient edits (demographics, insurance, attachments)
-- Appointment lifecycle (create/reschedule/cancel/no-show)
-- Invoice/payment lifecycle (issue/pay/refund/void)
-- Encounter finalize/lock (if enabled)
+- Project lifecycle (create, archive, delete)
+- Role/permission changes, user invites/removals
+- Workflow/status changes for tasks
+- Time entry edits (if enabled)
+- Billing changes (if enabled)
 `,
   },
 
   'brd/scheduling': {
     slug: 'brd/scheduling',
-    title: 'Scheduling',
+    title: 'Planning & scheduling',
     markdown: `## Core workflows
 
-### Create appointment
-- Select patient (or create patient)
-- Choose provider + location/room
-- Select service/type (drives duration + required fields)
-- Confirm time slot (availability rules)
-- Confirm notifications (reminder policy)
+### Create project plan
+- Define milestones and target dates
+- Break down into epics → tasks (or import)
+- Set owners and success criteria
 
-### Reschedule
-- Preserve reason + original slot (audit)
-- Optionally notify patient
+### Sprint / iteration planning (optional)
+- Select backlog items
+- Estimate work (points/hours)
+- Validate capacity vs workload
 
-### Cancel / no-show
-- Capture reason
-- Apply policy (fees, restrictions) if configured
+### Dependencies & blockers
+- Mark blocking relationships
+- Promote blocked items to the dashboard
 
-## Availability rules
+## Capacity rules (if enabled)
 
-- Provider working hours + breaks
-- Location/room constraints
-- Service duration + buffer time
-- Time-off blocks and holidays
+- Team working days / holidays
+- Member capacity (hours/points)
+- Over-allocation warnings
 
 ## Outputs
 
-- Day/week views, filters by provider/location
-- Printable schedule (optional)
+- Roadmap (timeline)
+- Sprint board (if enabled)
+- Workload view (by member)
 `,
   },
 
   'brd/patients': {
     slug: 'brd/patients',
-    title: 'Patients',
-    markdown: `## Patient record
+    title: 'Projects & work items',
+    markdown: `## Project record
 
-- Identity: name, DOB, gender (as applicable), identifiers
-- Contact: phone/email/address
-- Emergency contact
-- Consents (marketing + clinical, depending on region)
-- Documents: uploads (IDs, referrals, forms)
+- Name, description, status, owner
+- Team members & roles
+- Milestones and target dates
+- Linked documents and activity history
 
-## Patient lifecycle
+## Work item (task) record
 
-- Create patient
-- Merge duplicates
-- Archive / inactive status
+- Title, description, status, priority
+- Assignee(s), due date, labels
+- Checklist/subtasks
+- Dependencies (blocks / blocked by)
+- Attachments, comments, mentions
 
 ## Search & lists
 
-- Fast search (name, phone, ID)
-- Filters (status, last visit, tags)
+- Global search (project/task/comment)
+- Filters (status, assignee, due date, label, priority)
 `,
   },
 
   'brd/billing-payments': {
     slug: 'brd/billing-payments',
-    title: 'Billing & payments',
-    markdown: `## Invoice model
+    title: 'Billing, time & costs',
+    markdown: `## Time tracking (optional)
 
-- **Line items**: service, unit price, qty, discount/adjustment
-- **Totals**: subtotal, tax (optional), total due, balance
-- **Status**: draft / issued / partially paid / paid / void
+- Log time on tasks/projects
+- Billable vs non-billable
+- Timesheet approvals (optional)
 
-## Payment model
+## Cost tracking (optional)
 
-- Payment methods: cash/card/online (depending on integrations)
-- Refunds: full/partial with reason codes
-- Receipts: printable + downloadable
+- Internal cost rates (per user/role)
+- Budget vs actual (per project)
 
-## Reconciliation
+## Billing (optional)
 
-- Daily close-out report (payments collected by method)
+- Subscription billing (seats/plan)
+- Optional client invoicing from billable time
 - Exportable ledger (CSV)
 `,
   },
@@ -208,18 +209,18 @@ Define permissions as \`{ resource, action }\` pairs:
     title: 'Reporting & settings',
     markdown: `## Reporting (minimum)
 
-- Revenue (daily/weekly/monthly)
-- Collections vs outstanding
-- Aging buckets
-- No-shows/cancellations
-- Provider utilization
+- Project health (on track/at risk/off track)
+- Throughput (done per week), cycle time, WIP
+- Workload and utilization (if time tracking enabled)
+- Delivery predictability (planned vs done per sprint)
+- Exports
 
 ## Settings (minimum)
 
-- Practice profile (name, address, timezone)
-- Services / appointment types
+- Organization profile (name, timezone, branding)
+- Project templates / workflows (statuses, fields)
 - Users & roles
-- Notifications (reminders, templates)
+- Notifications (mentions, assignments, due dates)
 - Branding (logo, colors)
 `,
   },
