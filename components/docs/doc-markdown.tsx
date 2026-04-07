@@ -25,9 +25,7 @@ function HeadingAnchor({
     <a
       href={`#${id}`}
       className={cn(
-        'mt-1 shrink-0 text-reading-muted opacity-0 transition-all duration-200',
-        'group-hover:opacity-100 group-focus-within:opacity-100',
-        'hover:text-reading-accent focus-visible:opacity-100',
+        'mt-1 shrink-0 text-reading-muted',
         'focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-reading-accent/40 focus-visible:ring-offset-2 focus-visible:ring-offset-reading-surface'
       )}
       aria-label={`${docsCopy.markdown.linkToSectionPrefix} ${label}`}
@@ -63,10 +61,8 @@ export function DocMarkdown({ source }: { source: string }) {
               <h2
                 id={id}
                 className={cn(
-                  'group scroll-mt-24 border-b border-reading-code-border pb-2 text-2xl font-semibold tracking-tight text-reading-prose',
-                  'mt-12 flex items-start gap-2 first:mt-0',
-                  'border-l-2 border-transparent pl-1 transition-[border-color,padding] duration-200',
-                  'hover:border-reading-accent hover:pl-3'
+                  'scroll-mt-24 border-b border-reading-code-border pb-2 text-2xl font-semibold tracking-tight text-reading-prose',
+                  'mt-12 flex items-start gap-2 first:mt-0'
                 )}
                 {...props}
               >
@@ -82,10 +78,8 @@ export function DocMarkdown({ source }: { source: string }) {
               <h3
                 id={id}
                 className={cn(
-                  'group scroll-mt-24 text-xl font-semibold tracking-tight text-reading-prose',
-                  'mt-10 flex items-start gap-2',
-                  'border-l-2 border-transparent pl-1 transition-[border-color,padding] duration-200',
-                  'hover:border-reading-accent/70 hover:pl-3'
+                  'scroll-mt-24 text-xl font-semibold tracking-tight text-reading-prose',
+                  'mt-10 flex items-start gap-2'
                 )}
                 {...props}
               >
