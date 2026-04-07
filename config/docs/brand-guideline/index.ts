@@ -82,6 +82,20 @@ The product brand should feel **confident, modern, and operationally clear**.
 - **Primary mark**: \`/public/praszo-icon.svg\`
 - **Favicon / app icon source**: same master SVG
 
+## Logo preview
+
+![Praszo logo mark](/praszo-icon.svg)
+
+## Product use cases
+
+| Use case | Location | Size guidance | Variant | Rule |
+| --- | --- | --- | --- | --- |
+| App shell brand mark | Left sidebar header | 28-32px | Primary mark | Keep centered in neutral tile |
+| Browser identity | Favicon/tab icon | 16-32px | Primary mark | Use source SVG export |
+| Notifications and toasts | Inline status icon | 16-20px | Primary mark | Avoid visual effects |
+| Auth/splash screen | Intro/loader area | 48-72px | Primary mark | Maintain clear space |
+| Marketing/support docs | Section hero or footer | 40-64px | Primary mark/inverse | Ensure contrast against background |
+
 ## Placement standards
 
 ### Product shell (required)
